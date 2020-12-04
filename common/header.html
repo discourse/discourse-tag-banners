@@ -12,9 +12,9 @@
 
           if(/^\/tag\//.test(path) || /^\/tags\//.test(path)) {
             if(/^\/tag\//.test(path)) {
-                const controller = container.lookup('controller:tag');
+                var controller = container.lookup('controller:tag');
             } else {
-                const controller = container.lookup('controller:tags');
+                var controller = container.lookup('controller:tags');
             }
             const hideMobile = (!settings.show_on_mobile && this.site.mobileView) ? "true" : hideMobile;
 
