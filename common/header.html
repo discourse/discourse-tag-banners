@@ -10,7 +10,7 @@
 
           const path = window.location.pathname;
 
-          if(/^\/tag\//.test(path)) {
+          if(/^\/tag\//.test(path) || /^\/tags\//.test(path)) {
             const controller = container.lookup('controller:tag');
             const hideMobile = (!settings.show_on_mobile && this.site.mobileView) ? "true" : hideMobile;
 
