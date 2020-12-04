@@ -11,45 +11,12 @@
           const path = window.location.pathname;
 
           if(/^\/tags\//.test(path)) {
-            var controller = container.lookup('controller:tags');
-            const hideMobile = (!settings.show_on_mobile && this.site.mobileView) ? "true" : hideMobile;
-
-            let tag;
-            let additionalTags;
-
-            tag = controller.get("target.currentRoute.params.tag_id");
-            additionalTags = controller.get("target.currentRoute.params.additional_tags");
-
-            if(!hideMobile && tag != "none") {
-
-            document.querySelector("body").classList.add("tag-banner")
-
-              if (additionalTags) {
-                var tagList = additionalTags.split("/");
-                var additionalTagNames = h('span', " & " + tagList.join(' & '));
-                var additionalNaming = tagList.map(function(e) {return 'tag-banner-' + e});
-                var additionalClasses = additionalNaming.join('.');
-              } else {
-                var additionalClasses = "single-tag";
-              }
-
-              return h('div.tag-title-header'
-                + " .tag-banner-"
-                + tag
-                + " ."
-                + additionalClasses, h('div.tag-title-contents', [
-                  h('h1',  [
-                    h('span', tag),
-                    additionalTagNames
-                  ]),
-                ]),
-             );
-
-          } else {
-            document.querySelector("body").classList.remove("tag-banner");
+              const controller = container.lookup('controller:tags');
+          } else if (/^\/tag\//.test(path)) {
+              const controller = container.lookup('controller:tag');
           }
-        } else if(/^\/tag\//.test(path)) {
-            var controller = container.lookup('controller:tag');
+
+          if(/^\/tags\//.test(path) || /^\/tag\//.test(path)) {
             const hideMobile = (!settings.show_on_mobile && this.site.mobileView) ? "true" : hideMobile;
 
             let tag;
