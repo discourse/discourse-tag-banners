@@ -11,9 +11,9 @@
           const path = window.location.pathname;
 
           if(/^\/tags\//.test(path)) {
-              const controller = container.lookup('controller:tags');
+              var controller = container.lookup('controller:tags');
           } else if (/^\/tag\//.test(path)) {
-              const controller = container.lookup('controller:tag');
+              var controller = container.lookup('controller:tag');
           }
 
           if(/^\/tags\//.test(path) || /^\/tag\//.test(path)) {
