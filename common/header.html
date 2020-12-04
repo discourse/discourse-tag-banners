@@ -10,8 +10,13 @@
 
           const path = window.location.pathname;
 
-          if(/^\/tag\//.test(path)) {
-            const controller = container.lookup('controller:tag');
+          if(/^\/tags\//.test(path)) {
+              var controller = container.lookup('controller:tags');
+          } else if (/^\/tag\//.test(path)) {
+              var controller = container.lookup('controller:tag');
+          }
+
+          if(/^\/tags\//.test(path) || /^\/tag\//.test(path)) {
             const hideMobile = (!settings.show_on_mobile && this.site.mobileView) ? "true" : hideMobile;
 
             let tag;
@@ -46,7 +51,7 @@
              );
 
           } else {
-            document.querySelector("body").classList.remove("tag-banner")
+            document.querySelector("body").classList.remove("tag-banner");
           }
         }
       }
