@@ -1,19 +1,17 @@
 .tag-title-header {
-  padding-top: 60px;
   display: flex;
   text-align: center;
   width: 100%;
   justify-content: center;
-  background: $primary-very-low;
-  min-height: 123px;
-  @media screen and (max-width: 450px) {
-    min-height: 70px;
-  }
+  background: var(--primary-very-low);
+  min-height: 10em; // prevents hop when tag name loads
+
   .tag-title-contents {
     max-width: 700px;
-    padding: 45px 40px 40px 40px;
+    padding: 3.5em 3em 3em;
+
     @media screen and (max-width: 450px) {
-      padding: 20px;
+      padding: 1.5px;
     }
     svg {
       height: 1.5em;
@@ -22,6 +20,7 @@
     }
     h1 {
       display: inline;
+      margin: 0;
     }
   }
   .tag-title-description {
@@ -34,6 +33,6 @@
 }
 .tag-banner {
   #main-outlet {
-    padding-top: 20px;
+    padding-top: 1.5em;
   }
 }
