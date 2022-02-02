@@ -11,3 +11,8 @@ show_below_site_header:
   default: true
   type: bool
   description: "Display the banner in the below site header connector."
+
+remove_tag_hyphen:
+  default: false
+  type: bool
+  description: "Remove hyphens from tag name in banners"
