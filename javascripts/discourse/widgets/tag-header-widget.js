@@ -12,32 +12,36 @@ export default createWidget("tag-header-widget", {
       const hideMobile =
         !settings.show_on_mobile && this.site.mobileView ? "true" : hideMobile;
 
-      const router = getOwner(this).lookup("router:main");
-      const route = router.currentRoute;
-
       let tag = route.params.tag_id;
       let additionalTags = route.params.additional_tags;
+
+      if (settings.remove_tag_hyphen) {
+        tag = tag.replace(/-/g, " ");
+        additionalTags = additionalTags
+          ? additionalTags.replace(/-/g, " ")
+          : null;
+      }
 
       if (!hideMobile && tag != "none") {
         document.querySelector("body").classList.add("tag-banner");
 
+        let additionalTagNames;
+        let additionalClass;
+
         if (additionalTags) {
-          var tagList = additionalTags.split("/");
-          var additionalTagNames = h("span", " & " + tagList.join(" & "));
-          var additionalNaming = tagList.map(function (e) {
-            return "tag-banner-" + e;
+          let tagList = additionalTags.split("/");
+          let additionalClassList = tagList.map(function (e) {
+            return `tag-banner-${e}`;
           });
-          var additionalClasses = additionalNaming.join(".");
+          additionalTagNames = h("span", ` & ${tagList.join(" & ")}`);
+          additionalClass = additionalClassList.join(".");
         } else {
-          var additionalClasses = "single-tag";
+          additionalClass = "single-tag";
         }
 
         return h(
-          "div.tag-title-header" +
-            " .tag-banner-" +
-            tag +
-            " ." +
-            additionalClasses,
+          `div.tag-title-header .tag-banner-${tag} .${additionalClass}`,
+
           h("div.tag-title-contents", [
             h("h1", [h("span", tag), additionalTagNames]),
           ])
