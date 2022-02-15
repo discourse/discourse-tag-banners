@@ -11,7 +11,7 @@
     padding: 3.5em 3em 3em;
 
     @media screen and (max-width: 450px) {
-      padding: 1.5px;
+      padding: 1.5em;
     }
     svg {
       height: 1.5em;
@@ -21,6 +21,9 @@
     h1 {
       display: inline;
       margin: 0;
+    }
+    p:empty {
+      display: none;
     }
   }
   .tag-title-description {
@@ -34,5 +37,14 @@
 .tag-banner {
   #main-outlet {
     padding-top: 1.5em;
+  }
+}
+
+.mobile-view {
+  .tag-title-header {
+    min-height: 3em; // prevents hop when tag name loads
+    p {
+      margin-top: 0;
+    }
   }
 }
