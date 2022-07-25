@@ -1,6 +1,6 @@
 {
   "name": "discourse-tag-banners",
-  "about_url": "",
   "component": true,
+  "about_url": "",
   "license_url": ""
 }
