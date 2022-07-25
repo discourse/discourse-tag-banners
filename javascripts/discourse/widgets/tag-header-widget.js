@@ -36,7 +36,7 @@ export default createWidget("tag-header-widget", {
           : null;
       }
 
-      if (!hideMobile && tag != "none") {
+      if (!hideMobile && tag !== "none") {
         document.querySelector("body").classList.add("tag-banner");
 
         let additionalTagNames;
@@ -57,7 +57,7 @@ export default createWidget("tag-header-widget", {
         if (!this.state.loaded) {
           this.getTagInfo(tag);
         } else {
-          if (this.state.tag.name != tag) {
+          if (this.state.tag.name !== tag) {
             // update the tag description when the route's tag changes
             this.getTagInfo(tag);
           }
