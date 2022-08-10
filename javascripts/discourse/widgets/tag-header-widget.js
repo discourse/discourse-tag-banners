@@ -46,7 +46,7 @@ export default createWidget("tag-header-widget", {
           : null;
       }
 
-      if (!hideMobile && tag != "none") {
+      if (!hideMobile && tag !== "none") {
         document.querySelector("body").classList.add("tag-banner");
 
         let additionalClass;
