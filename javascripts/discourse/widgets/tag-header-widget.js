@@ -27,28 +27,37 @@ export default createWidget("tag-header-widget", {
 
     if (route && route.params && route.params.hasOwnProperty("tag_id")) {
       let tag = route.params.tag_id;
+      let formattedTagName = tag;
+
       let additionalTags = route.params.additional_tags;
+      let formattedAdditionalTagNames = additionalTags;
 
       if (settings.remove_tag_hyphen) {
-        tag = tag.replace(/-/g, " ");
-        additionalTags = additionalTags
-          ? additionalTags.replace(/-/g, " ")
+        formattedTagName = formattedTagName.replace(/-/g, " ");
+        formattedAdditionalTagNames = formattedAdditionalTagNames
+          ? formattedAdditionalTagNames.replace(/-/g, " ")
+          : null;
+      }
+
+      if (settings.remove_tag_underscore) {
+        formattedTagName = formattedTagName.replace(/_/g, " ");
+        formattedAdditionalTagNames = formattedAdditionalTagNames
+          ? formattedAdditionalTagNames.replace(/_/g, " ")
           : null;
       }
 
       if (!hideMobile && tag !== "none") {
         document.querySelector("body").classList.add("tag-banner");
 
-        let additionalTagNames;
         let additionalClass;
         let tagDescription;
 
         if (additionalTags) {
-          let tagList = additionalTags.split("/");
+          let tagList = formattedAdditionalTagNames.split("/");
           let additionalClassList = tagList.map(function (e) {
             return `tag-banner-${e}`;
           });
-          additionalTagNames = h("span", ` & ${tagList.join(" & ")}`);
+          formattedAdditionalTagNames = h("span", ` & ${tagList.join(" & ")}`);
           additionalClass = additionalClassList.join(".");
         } else {
           additionalClass = "single-tag";
@@ -71,7 +80,10 @@ export default createWidget("tag-header-widget", {
           return h(
             `div.tag-title-header .tag-banner-${tag} .${additionalClass}`,
             h("div.tag-title-contents", [
-              h("h1", [h("span", tag), additionalTagNames]),
+              h("h1", [
+                h("span", formattedTagName),
+                formattedAdditionalTagNames,
+              ]),
               h("p", tagDescription),
             ])
           );
