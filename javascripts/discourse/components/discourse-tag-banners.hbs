@@ -1,0 +1,21 @@
+{{#if this.isVisible}}
+  {{#if this.loaded}}
+    <div
+      class="tag-title-header tag-banner-{{this.formattedTagName}}
+        {{this.additionalClass}}"
+    >
+      <div class="tag-title-contents">
+        <h1>
+          <span>{{this.formattedTagName}}</span>
+          {{#if this.formattedAdditionalTagNames}}
+            &
+            {{this.formattedAdditionalTagNames}}
+          {{/if}}
+        </h1>
+        {{#if (theme-setting "show_tag_description")}}
+          <p>{{this.tagDescription}}</p>
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
