@@ -1,4 +1,4 @@
-{{#if (and this.isVisible this.keepDuringLoadingRoute)}}
+{{#if shouldRender}}
   <div
     {{did-insert this.getTagInfo}}
     {{did-update this.getTagInfo this.isVisible}}

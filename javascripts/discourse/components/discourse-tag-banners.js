@@ -47,6 +47,10 @@ export default class DiscourseTagBanners extends Component {
     return tagName;
   }
 
+  get shouldRender() {
+    return this.isVisible && this.keepDuringLoadingRoute
+  }
+
   get formattedTagName() {
     return this.formatTagName(this.tag?.name);
   }
