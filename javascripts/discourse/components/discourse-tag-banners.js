@@ -7,37 +7,30 @@ export default class DiscourseTagBanners extends Component {
   @service store;
   @service router;
   @service site;
-  @tracked loaded = false;
   @tracked tag = null;
-  @tracked formattedTagName = "";
-  @tracked formattedAdditionalTagNames = "";
-  @tracked additionalClass = "";
-  @tracked tagDescription = "";
-  @tracked isVisible = false;
+  @tracked keepDuringLoadingRoute = false;
+  @tracked isIntersection = false;
 
-  constructor() {
-    super(...arguments);
-    this.router.on("routeDidChange", this, this.routeChanged);
-  }
+  get isVisible() {
+    const route = this.router?.currentRoute;
 
-  willDestroy() {
-    super.willDestroy(...arguments);
-    this.router.off("routeDidChange", this, this.routeChanged);
-  }
-
-  @action
-  routeChanged() {
-    if (this.site.mobileView && !settings.show_on_mobile) {
-      return;
-    }
-
-    const route = this.router.currentRoute;
-    if (route && route.params && route.params.hasOwnProperty("tag_id")) {
-      const tag = route.params.tag_id;
-      this.isVisible = true;
-      this.getTagInfo(tag);
+    if (
+      route &&
+      route.params &&
+      route.params.tag_id &&
+      route.params.tag_id !== "none"
+    ) {
+      this.keepDuringLoadingRoute = true;
+      this.isLoading = false;
+      return true;
     } else {
-      this.isVisible = false;
+      if (route && route.name.includes("loading")) {
+        return this.keepDuringLoadingRoute;
+      } else {
+        this.keepDuringLoadingRoute = false;
+        this.tag = null;
+        return false;
+      }
     }
   }
 
@@ -54,33 +47,37 @@ export default class DiscourseTagBanners extends Component {
     return tagName;
   }
 
-  getAdditionalClass() {
+  get formattedTagName() {
+    return this.formatTagName(this.tag?.name);
+  }
+
+  get formattedAdditionalTagNames() {
+    const additionalTags = this.router.currentRoute.params.additional_tags;
+    return additionalTags ? this.formatTagName(additionalTags) : "";
+  }
+
+  get additionalClass() {
+    if (this.formattedAdditionalTagNames === "") {
+      return "single-tag";
+    }
+
     let tagList = this.formattedAdditionalTagNames.split(" & ");
     return tagList.map((e) => `tag-banner-${e}`).join(" ");
   }
 
   @action
-  async getTagInfo(tag) {
-    if (tag === "none") {
-      this.loaded = false;
+  async getTagInfo() {
+    if (!this.isVisible) {
       return;
     }
 
-    const route = this.router.currentRoute;
-    const result = await this.store.find("tag-info", tag);
-    let additionalTags = route.params.additional_tags;
+    const route = this.router?.currentRoute;
+    const tag = route?.params?.tag_id;
 
-    this.formattedTagName = this.formatTagName(tag);
-    this.formattedAdditionalTagNames = this.formatTagName(additionalTags);
-
-    if (additionalTags) {
-      this.additionalClass = this.getAdditionalClass();
-    } else {
-      this.additionalClass = "single-tag";
+    if (tag) {
+      const result = await this.store.find("tag-info", tag);
+      this.isIntersection = route?.params?.additional_tags;
+      this.tag = result;
     }
-
-    this.tag = result;
-    this.loaded = true;
-    this.tagDescription = this.tag.description || "";
   }
 }
