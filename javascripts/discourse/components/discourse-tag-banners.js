@@ -12,19 +12,15 @@ export default class DiscourseTagBanners extends Component {
   @tracked isIntersection = false;
 
   get isVisible() {
-    const route = this.router?.currentRoute;
-
     if (
-      route &&
-      route.params &&
-      route.params.tag_id &&
-      route.params.tag_id !== "none"
+      this.currentRouteParams.tag_id &&
+      this.currentRouteParams.tag_id !== "none"
     ) {
       this.keepDuringLoadingRoute = true;
       this.isLoading = false;
       return true;
     } else {
-      if (route && route.name.includes("loading")) {
+      if (this.router.currentRoute.name.includes("loading")) {
         return this.keepDuringLoadingRoute;
       } else {
         this.keepDuringLoadingRoute = false;
@@ -34,7 +30,7 @@ export default class DiscourseTagBanners extends Component {
     }
   }
 
-  formatTagName(tagName = "") {
+  #formatTagName(tagName = "") {
     // for intersections: tag1/tag2 => tag1 & tag2
     tagName = tagName.replace(/\//g, " & ");
 
@@ -47,17 +43,21 @@ export default class DiscourseTagBanners extends Component {
     return tagName;
   }
 
+  get currentRouteParams() {
+    return this.router?.currentRoute?.params;
+  }
+
   get shouldRender() {
     return this.isVisible && this.keepDuringLoadingRoute;
   }
 
   get formattedTagName() {
-    return this.formatTagName(this.tag?.name);
+    return this.#formatTagName(this.tag?.name);
   }
 
   get formattedAdditionalTagNames() {
-    const additionalTags = this.router.currentRoute.params.additional_tags;
-    return additionalTags ? this.formatTagName(additionalTags) : "";
+    const additionalTags = this.currentRouteParams.additional_tags;
+    return additionalTags ? this.#formatTagName(additionalTags) : "";
   }
 
   get additionalClass() {
@@ -75,12 +75,11 @@ export default class DiscourseTagBanners extends Component {
       return;
     }
 
-    const route = this.router?.currentRoute;
-    const tag = route?.params?.tag_id;
+    const tag = this.currentRouteParams.tag_id;
 
     if (tag) {
       const result = await this.store.find("tag-info", tag);
-      this.isIntersection = route?.params?.additional_tags;
+      this.isIntersection = this.currentRouteParams.additional_tags;
       this.tag = result;
     }
   }
