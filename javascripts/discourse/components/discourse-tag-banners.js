@@ -6,29 +6,9 @@ import { inject as service } from "@ember/service";
 export default class DiscourseTagBanners extends Component {
   @service store;
   @service router;
-  @service site;
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;
   @tracked isIntersection = false;
-
-  get isVisible() {
-    if (
-      this.currentRouteParams.tag_id &&
-      this.currentRouteParams.tag_id !== "none"
-    ) {
-      this.keepDuringLoadingRoute = true;
-      this.isLoading = false;
-      return true;
-    } else {
-      if (this.router.currentRoute.name.includes("loading")) {
-        return this.keepDuringLoadingRoute;
-      } else {
-        this.keepDuringLoadingRoute = false;
-        this.tag = null;
-        return false;
-      }
-    }
-  }
 
   #formatTagName(tagName = "") {
     // for intersections: tag1/tag2 => tag1 & tag2
@@ -48,7 +28,12 @@ export default class DiscourseTagBanners extends Component {
   }
 
   get shouldRender() {
-    return this.isVisible && this.keepDuringLoadingRoute;
+    return (
+      (this.currentRouteParams.tag_id !== "none" &&
+        this.currentRouteParams?.tag_id) ||
+      (this.keepDuringLoadingRoute &&
+        this.router.currentRoute.name.includes("loading"))
+    );
   }
 
   get formattedTagName() {
@@ -71,16 +56,22 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
-    if (!this.isVisible) {
-      return;
-    }
-
-    const tag = this.currentRouteParams.tag_id;
-
+    const tag = this.currentRouteParams?.tag_id;
     if (tag) {
       const result = await this.store.find("tag-info", tag);
-      this.isIntersection = this.currentRouteParams.additional_tags;
       this.tag = result;
+      this.isIntersection = this.currentRouteParams.additional_tags;
+      this.keepDuringLoadingRoute = true;
+    } else {
+      if (!this.router.currentRoute.name.includes("loading")) {
+        this.keepDuringLoadingRoute = false;
+      }
     }
+  }
+
+  @action
+  resetTag() {
+    this.keepDuringLoadingRoute = false;
+    this.tag = null;
   }
 }

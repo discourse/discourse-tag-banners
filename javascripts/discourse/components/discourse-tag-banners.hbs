@@ -1,7 +1,8 @@
-{{#if shouldRender}}
+{{#if this.shouldRender}}
   <div
     {{did-insert this.getTagInfo}}
-    {{did-update this.getTagInfo this.isVisible}}
+    {{did-update this.getTagInfo this.shouldRender}}
+    {{will-destroy this.resetTag}}
     class={{concat-class
       "tag-title-header"
       (concat "tag-banner-" this.formattedTagName)

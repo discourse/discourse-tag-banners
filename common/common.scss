@@ -4,7 +4,6 @@
   width: 100%;
   justify-content: center;
   background: var(--primary-very-low);
-  min-height: 10em; // prevents hop when tag name loads
 
   .tag-title-contents {
     max-width: 46em;
