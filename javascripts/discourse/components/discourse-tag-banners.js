@@ -6,6 +6,7 @@ import { inject as service } from "@ember/service";
 export default class DiscourseTagBanners extends Component {
   @service store;
   @service router;
+  @service site;
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;
   @tracked isIntersection = false;
