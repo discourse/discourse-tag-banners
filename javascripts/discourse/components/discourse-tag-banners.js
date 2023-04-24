@@ -12,7 +12,7 @@ export default class DiscourseTagBanners extends Component {
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;
   @tracked isIntersection = false;
-  
+
   constructor() {
     super(...arguments);
     this.categoryBannerPresence = getOwner(this).lookup(
