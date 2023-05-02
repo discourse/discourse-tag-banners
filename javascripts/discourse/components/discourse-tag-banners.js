@@ -15,6 +15,8 @@ export default class DiscourseTagBanners extends Component {
 
   constructor() {
     super(...arguments);
+
+    // this prevents a failure if the category banner component is not installed
     this.categoryBannerPresence = getOwner(this).lookup(
       "service:categoryBannerPresence"
     );
