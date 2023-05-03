@@ -1,8 +1,8 @@
 <div class="tag-banner__text-only">
   {{#if (eq this.site.siteSettings.tag_style "simple")}}
-    {{#unless (theme-setting "hide_tag_icon")}}
+    {{#if (eq (theme-setting "hide_tag_icon") false)}}
       {{d-icon "tag"}}
-    {{/unless}}
+    {{/if}}
   {{/if}}
   {{discourse-tag @formattedTagName}}
   {{#if @formattedAdditionalTagNames}}
