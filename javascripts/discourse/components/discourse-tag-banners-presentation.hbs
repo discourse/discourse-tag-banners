@@ -1,0 +1,23 @@
+<div
+  class={{concat-class
+    "tag-title-header"
+    (concat "tag-banner-" @formattedTagName)
+    @additionalClass
+  }}
+>
+  <div class="tag-title-contents">
+    <h1>
+      <span>{{@formattedTagName}}</span>
+      {{#if @formattedAdditionalTagNames}}
+        &amp;
+        {{@formattedAdditionalTagNames}}
+      {{/if}}
+    </h1>
+    {{#unless @isIntersection}}
+      {{! hide descriptions on tag intersections}}
+      {{#if (theme-setting "show_tag_description")}}
+        <p>{{@tag.description}}</p>
+      {{/if}}
+    {{/unless}}
+  </div>
+</div>

@@ -47,3 +47,35 @@
     }
   }
 }
+
+// category banner integration
+
+.tag-banner__text-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-down-4);
+  font-weight: normal;
+
+  .d-icon {
+    font-size: var(--font-down-3);
+    margin-right: 0.33em;
+  }
+
+  .discourse-tag,
+  .discourse-tag.bullet,
+  .discourse-tag.box,
+  .discourse-tag.simple {
+    margin: 0;
+    color: currentColor;
+    &:before {
+      background: currentColor;
+    }
+  }
+
+  .discourse-tag.box {
+    background: transparent;
+    font-size: var(--font-down-1);
+    box-shadow: 0 0 0 1px currentColor;
+  }
+}

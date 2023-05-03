@@ -2,14 +2,25 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { getOwner } from "discourse-common/lib/get-owner";
 
 export default class DiscourseTagBanners extends Component {
   @service store;
   @service router;
   @service site;
+  @tracked categoryBannerPresence = null;
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;
   @tracked isIntersection = false;
+
+  constructor() {
+    super(...arguments);
+
+    // this prevents a failure if the category banner component is not installed
+    this.categoryBannerPresence = getOwner(this).lookup(
+      "service:categoryBannerPresence"
+    );
+  }
 
   #formatTagName(tagName = "") {
     // for intersections: tag1/tag2 => tag1 & tag2

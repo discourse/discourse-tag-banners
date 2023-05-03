@@ -1,0 +1,10 @@
+<div class="tag-banner__text-only">
+  {{#if (eq this.site.siteSettings.tag_style "simple")}}
+    {{d-icon "tag"}}
+  {{/if}}
+  {{discourse-tag @formattedTagName}}
+  {{#if @formattedAdditionalTagNames}}
+    &amp;
+    {{@formattedAdditionalTagNames}}
+  {{/if}}
+</div>
