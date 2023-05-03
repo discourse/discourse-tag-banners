@@ -1,4 +1,4 @@
-{{#if (not (and this.site.mobileView (theme-setting "show_on_mobile")))}}
+{{#unless this.hideMobile}}
   {{#if this.shouldRender}}
     <div
       class="tag-banner-container"
@@ -22,4 +22,4 @@
       {{/if}}
     </div>
   {{/if}}
-{{/if}}
+{{/unless}}

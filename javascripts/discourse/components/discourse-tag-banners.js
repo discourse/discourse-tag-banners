@@ -66,6 +66,10 @@ export default class DiscourseTagBanners extends Component {
     return tagList.map((e) => `tag-banner-${e}`).join(" ");
   }
 
+  get hideMobile() {
+    return this.site.mobileView && !settings.show_on_mobile;
+  }
+
   @action
   async getTagInfo() {
     const tag = this.currentRouteParams?.tag_id;
