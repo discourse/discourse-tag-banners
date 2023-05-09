@@ -4,7 +4,7 @@
       {{d-icon "tag"}}
     {{/if}}
   {{/if}}
-  {{discourse-tag @formattedTagName}}
+  {{discourse-tag @tag.name displayName=@formattedTagName}}
   {{#if @formattedAdditionalTagNames}}
     &amp;
     {{@formattedAdditionalTagNames}}
