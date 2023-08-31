@@ -16,7 +16,7 @@
     {{#unless @isIntersection}}
       {{! hide descriptions on tag intersections}}
       {{#if (theme-setting "show_tag_description")}}
-        <p>{{@tag.description}}</p>
+        <p>{{html-safe @tag.description}}</p>
       {{/if}}
     {{/unless}}
   </div>
