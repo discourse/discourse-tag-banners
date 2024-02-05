@@ -1,5 +1,10 @@
 {{#if (theme-setting "show_above_site_header")}}
-  {{#unless this.categoryBannerPresence.isPresent}}
+  {{#if
+    (or
+      (not this.categoryBannerPresence.isPresent)
+      (theme-setting "show_with_category_banners")
+    )
+  }}
     <DiscourseTagBanners />
-  {{/unless}}
+  {{/if}}
 {{/if}}

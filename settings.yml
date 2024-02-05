@@ -16,6 +16,11 @@ show_below_site_header:
   type: bool
   description: "Display the banner in the below site header connector."
 
+show_above_main_container:
+  default: false
+  type: bool
+  description: "Display the banner in the above main container connector, for sites with the sidebar enabled."
+
 remove_tag_hyphen:
   default: false
   type: bool
@@ -30,3 +35,8 @@ hide_tag_icon:
   default: false
   type: bool
   description: "Hide the tag icon when used along with category banners"
+
+show_with_category_banners:
+  default: false
+  type: bool
+  description: "Show full banner alongside category banners"
