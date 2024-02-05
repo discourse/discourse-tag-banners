@@ -6,19 +6,24 @@
       {{did-update this.getTagInfo this.shouldRender}}
       {{will-destroy this.resetTag}}
     >
-      {{#if this.categoryBannerPresence.isPresent}}
-        <DiscourseTagBannersTextOnly
-          @formattedTagName={{this.formattedTagName}}
-          @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
-          @tag={{this.tag}}
-        />
-      {{else}}
+      {{#if
+        (or
+          (not this.categoryBannerPresence.isPresent)
+          (theme-setting "show_with_category_banners")
+        )
+      }}
         <DiscourseTagBannersPresentation
           @formattedTagName={{this.formattedTagName}}
           @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
           @isIntersection={{this.isIntersection}}
           @tag={{this.tag}}
           @additionalClass={{this.additionalClass}}
+        />
+      {{else}}
+        <DiscourseTagBannersTextOnly
+          @formattedTagName={{this.formattedTagName}}
+          @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+          @tag={{this.tag}}
         />
       {{/if}}
     </div>
