@@ -1,6 +1,6 @@
-import Component from "@ember/component";
 import { tracked } from "@glimmer/tracking";
 import { getOwner } from "@ember/application";
+import Component from "@ember/component";
 
 export default class extends Component {
   @tracked categoryBannerPresence = null;
