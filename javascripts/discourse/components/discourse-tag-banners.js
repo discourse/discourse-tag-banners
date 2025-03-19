@@ -8,6 +8,7 @@ export default class DiscourseTagBanners extends Component {
   @service store;
   @service router;
   @service site;
+
   @tracked categoryBannerPresence = null;
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;

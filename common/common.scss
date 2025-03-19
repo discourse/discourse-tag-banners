@@ -16,19 +16,23 @@
     @media screen and (max-width: 450px) {
       padding: 1.5em;
     }
+
     svg {
       height: 1.5em;
       width: 1.1em;
       margin-right: 0.25em;
     }
+
     h1 {
       display: inline;
       margin: 0;
     }
+
     p:empty {
       display: none;
     }
   }
+
   .tag-title-description {
     a,
     a:visited {
@@ -37,6 +41,7 @@
     }
   }
 }
+
 .tag-banner {
   #main-outlet {
     padding-top: 1.5em;
@@ -46,6 +51,7 @@
 .mobile-view {
   .tag-title-header {
     min-height: 3em; // prevents hop when tag name loads
+
     p {
       margin-top: 0;
     }
@@ -53,7 +59,6 @@
 }
 
 // category banner integration
-
 .tag-banner__text-only {
   display: flex;
   align-items: center;
@@ -71,15 +76,16 @@
   .discourse-tag.box,
   .discourse-tag.simple {
     margin: 0;
-    color: currentColor;
-    &:before {
-      background: currentColor;
+    color: currentcolor;
+
+    &::before {
+      background: currentcolor;
     }
   }
 
   .discourse-tag.box {
     background: transparent;
     font-size: var(--font-down-1);
-    box-shadow: 0 0 0 1px currentColor;
+    box-shadow: 0 0 0 1px currentcolor;
   }
 }
