@@ -2,7 +2,13 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { getOwner } from "@ember/application";
 import { action } from "@ember/object";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import didUpdate from "@ember/render-modifiers/modifiers/did-update";
+import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 import { service } from "@ember/service";
+import { not, or } from "truth-helpers";
+import DiscourseTagBannersPresentation from "./discourse-tag-banners-presentation";
+import DiscourseTagBannersTextOnly from "./discourse-tag-banners-text-only";
 
 export default class DiscourseTagBanners extends Component {
   @service store;
@@ -91,4 +97,38 @@ export default class DiscourseTagBanners extends Component {
     this.keepDuringLoadingRoute = false;
     this.tag = null;
   }
+
+  <template>
+    {{#unless this.hideMobile}}
+      {{#if this.shouldRender}}
+        <div
+          class="tag-banner-container"
+          {{didInsert this.getTagInfo}}
+          {{didUpdate this.getTagInfo this.shouldRender}}
+          {{willDestroy this.resetTag}}
+        >
+          {{#if
+            (or
+              (not this.categoryBannerPresence.isPresent)
+              settings.show_with_category_banners
+            )
+          }}
+            <DiscourseTagBannersPresentation
+              @formattedTagName={{this.formattedTagName}}
+              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+              @isIntersection={{this.isIntersection}}
+              @tag={{this.tag}}
+              @additionalClass={{this.additionalClass}}
+            />
+          {{else}}
+            <DiscourseTagBannersTextOnly
+              @formattedTagName={{this.formattedTagName}}
+              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+              @tag={{this.tag}}
+            />
+          {{/if}}
+        </div>
+      {{/if}}
+    {{/unless}}
+  </template>
 }
