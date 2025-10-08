@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { getOwner } from "@ember/application";
 import { action } from "@ember/object";
+import { getOwner } from "@ember/owner";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";

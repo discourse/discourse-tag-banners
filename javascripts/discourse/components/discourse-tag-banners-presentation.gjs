@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 import { concat } from "@ember/helper";
+import { htmlSafe } from "@ember/template";
 import concatClass from "discourse/helpers/concat-class";
-import htmlSafe from "discourse/helpers/html-safe";
 
 export default class DiscourseTagBannersPresentation extends Component {
   tagName = ""; // removing an extra tag that is added by default
