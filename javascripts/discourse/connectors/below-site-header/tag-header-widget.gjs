@@ -1,6 +1,6 @@
 import { tracked } from "@glimmer/tracking";
-import { getOwner } from "@ember/application";
 import Component from "@ember/component";
+import { getOwner } from "@ember/owner";
 import { not, or } from "truth-helpers";
 import DiscourseTagBanners from "../../components/discourse-tag-banners";
 
