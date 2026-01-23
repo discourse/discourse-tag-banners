@@ -13,7 +13,9 @@ export default class DiscourseTagBannersTextOnly extends Component {
           {{icon "tag"}}
         {{/if}}
       {{/if}}
-      {{discourseTag @tag.name displayName=@formattedTagName}}
+      {{#if @tag}}
+        {{discourseTag @tag.name displayName=@formattedTagName}}
+      {{/if}}
       {{#if @formattedAdditionalTagNames}}
         &amp;
         {{@formattedAdditionalTagNames}}
