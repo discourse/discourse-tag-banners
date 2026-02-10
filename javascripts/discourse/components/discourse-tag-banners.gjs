@@ -52,7 +52,8 @@ export default class DiscourseTagBanners extends Component {
   }
 
   get shouldRender() {
-    return (
+    return (this.args.model && settings.show_on_topics) &&
+    (
       (this.currentRouteParams.tag_name !== "none" &&
         this.currentRouteParams?.tag_name) ||
       (this.keepDuringLoadingRoute &&
@@ -85,6 +86,7 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
+    if (this.args.model) {
     // eslint-disable-next-line no-console
     console.log(this.args.model.tags[0].name);
     const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0] ? this.args.model.tags[0].name : "";
