@@ -87,7 +87,7 @@ export default class DiscourseTagBanners extends Component {
   async getTagInfo() {
     const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0] ? this.args.model.tags[0].name : "";
     // eslint-disable-next-line no-console
-    console.log("Tag: ' + tag + "'");
+    console.log("Tag: '" + tag + "'");
     if (tag === "") {
       // eslint-disable-next-line no-console
       console.log("Hiding");
