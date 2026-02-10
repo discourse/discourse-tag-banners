@@ -89,10 +89,10 @@ export default class DiscourseTagBanners extends Component {
       // eslint-disable-next-line no-console
       console.log(this.args.model.tags[0].name);
     }
-    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0] ? this.args.model.tags[0].name : "";
+    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : (this.args.model.tags[0] ? this.args.model.tags[0].name : null);
     // eslint-disable-next-line no-console
     console.log("Tag: '" + tag + "'");
-    if (tag === "") {
+    if (tag === null) {
       // eslint-disable-next-line no-console
       console.log("Hiding");
       this.showBanner = false;
@@ -122,7 +122,7 @@ export default class DiscourseTagBanners extends Component {
           <div
             class="tag-banner-container"
             {{didInsert this.getTagInfo}}
-            {{didUpdate this.getTagInfo this.shouldRender}}
+            {{! didUpdate this.getTagInfo this.shouldRender}}
             {{willDestroy this.resetTag}}
           >
             {{#if
