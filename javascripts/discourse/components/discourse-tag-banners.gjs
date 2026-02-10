@@ -46,12 +46,17 @@ export default class DiscourseTagBanners extends Component {
     return this.router?.currentRoute?.params;
   }
 
+  get isTopicPage() {
+    return this.router.currentRoute.name.includes("topic");
+  }
+
   get shouldRender() {
     return (
       (this.currentRouteParams.tag_name !== "none" &&
         this.currentRouteParams?.tag_name) ||
       (this.keepDuringLoadingRoute &&
-        this.router.currentRoute.name.includes("loading"))
+        this.router.currentRoute.name.includes("loading") ||
+      (this.isTopicPage))
     );
   }
 
@@ -79,7 +84,7 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
-    const tag = this.currentRouteParams?.tag_name;
+    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0].name;
     if (tag) {
       const result = await this.store.find("tag-info", tag);
       this.tag = result;
