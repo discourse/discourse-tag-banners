@@ -84,7 +84,7 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
-    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0].name;
+    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0] ? this.args.model.tags[0].name : "";
     if (tag) {
       const result = await this.store.find("tag-info", tag);
       this.tag = result;
