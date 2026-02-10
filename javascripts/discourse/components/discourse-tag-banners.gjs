@@ -19,6 +19,7 @@ export default class DiscourseTagBanners extends Component {
   @tracked tag = null;
   @tracked keepDuringLoadingRoute = false;
   @tracked isIntersection = false;
+  @tracked showBanner = true;
 
   constructor() {
     super(...arguments);
@@ -85,6 +86,9 @@ export default class DiscourseTagBanners extends Component {
   @action
   async getTagInfo() {
     const tag = !this.isTopic ? this.currentRouteParams?.tag_name : this.args.model.tags[0] ? this.args.model.tags[0].name : "";
+    if (tag === "") {
+      this.showBanner = false;
+    }
     if (tag) {
       const result = await this.store.find("tag-info", tag);
       this.tag = result;
@@ -106,33 +110,35 @@ export default class DiscourseTagBanners extends Component {
   <template>
     {{#unless this.hideMobile}}
       {{#if this.shouldRender}}
-        <div
-          class="tag-banner-container"
-          {{didInsert this.getTagInfo}}
-          {{didUpdate this.getTagInfo this.shouldRender}}
-          {{willDestroy this.resetTag}}
-        >
-          {{#if
-            (or
-              (not this.categoryBannerPresence.isPresent)
-              settings.show_with_category_banners
-            )
-          }}
-            <DiscourseTagBannersPresentation
-              @formattedTagName={{this.formattedTagName}}
-              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
-              @isIntersection={{this.isIntersection}}
-              @tag={{this.tag}}
-              @additionalClass={{this.additionalClass}}
-            />
-          {{else}}
-            <DiscourseTagBannersTextOnly
-              @formattedTagName={{this.formattedTagName}}
-              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
-              @tag={{this.tag}}
-            />
-          {{/if}}
-        </div>
+        {{#if this.showBanner}}
+          <div
+            class="tag-banner-container"
+            {{didInsert this.getTagInfo}}
+            {{didUpdate this.getTagInfo this.shouldRender}}
+            {{willDestroy this.resetTag}}
+          >
+            {{#if
+              (or
+                (not this.categoryBannerPresence.isPresent)
+                settings.show_with_category_banners
+              )
+            }}
+              <DiscourseTagBannersPresentation
+                @formattedTagName={{this.formattedTagName}}
+                @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+                @isIntersection={{this.isIntersection}}
+                @tag={{this.tag}}
+                @additionalClass={{this.additionalClass}}
+              />
+            {{else}}
+              <DiscourseTagBannersTextOnly
+                @formattedTagName={{this.formattedTagName}}
+                @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+                @tag={{this.tag}}
+              />
+            {{/if}}
+          </div>
+        {{/if}}
       {{/if}}
     {{/unless}}
   </template>
