@@ -6,6 +6,11 @@ show_tag_description:
   default: true
   description: "Show tag description when available"
 
+show_on_topics:
+  default: true
+  type: bool
+  description: "Show on topic pages"
+
 show_above_site_header:
   default: false
   type: bool
