@@ -17,7 +17,7 @@ export default class extends Component {
   }
 
   <template>
-    {{#if settings.show_above_main_container}}
+    {{#if settings.show_on_topics}}
       {{#if
         (or
           (not this.categoryBannerPresence.isPresent)
