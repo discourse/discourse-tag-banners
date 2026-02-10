@@ -48,7 +48,7 @@ export default class DiscourseTagBanners extends Component {
   }
 
   get isTopicPage() {
-    return this.router.currentRoute.name.includes("topic");
+    return this.router.currentRoute.name.includes("topic") && this.args.model.topic !== undefined;
   }
 
   get shouldRender() {
