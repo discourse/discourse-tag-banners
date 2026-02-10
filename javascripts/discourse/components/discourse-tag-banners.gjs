@@ -52,13 +52,12 @@ export default class DiscourseTagBanners extends Component {
   }
 
   get shouldRender() {
-    return (this.args.model && settings.show_on_topics) &&
+    return (this.isTopicPage && settings.show_on_topics) ||
     (
       (this.currentRouteParams.tag_name !== "none" &&
         this.currentRouteParams?.tag_name) ||
       (this.keepDuringLoadingRoute &&
-        this.router.currentRoute.name.includes("loading") ||
-      (this.isTopicPage))
+        this.router.currentRoute.name.includes("loading"))
     );
   }
 
