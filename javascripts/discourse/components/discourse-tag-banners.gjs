@@ -105,7 +105,9 @@ export default class DiscourseTagBanners extends Component {
       // eslint-disable-next-line no-console
       console.log(tag);
       // eslint-disable-next-line no-console
-      console.log(this.isTopic ? (this.args.model.tags[0] ? this.args.model.tags[0].name : null) : this.currentRouteParams?.tag_name);
+      console.log(this.args.model.tags[0] ? true : false);
+      // eslint-disable-next-line no-console
+      console.log(this.isTopic ? this.args.model.tags[0].name : this.currentRouteParams?.tag_name);
     }
 
     if (tag) {
