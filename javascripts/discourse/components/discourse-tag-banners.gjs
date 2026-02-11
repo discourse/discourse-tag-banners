@@ -90,13 +90,13 @@ export default class DiscourseTagBanners extends Component {
       console.log(this.args.model.tags[0].name);
     }
     /* eslint-disable */
-    console.log(this.isTopic);
+    console.log(this.isTopicPage);
     console.log(this.args.model.tags[0]);
     console.log(this.args.model.tags[0] ? this.args.model.tags[0].name : null);
     /* eslint-enable */
     const topicTag = this.args.model.tags[0] ? this.args.model.tags[0].name : null;
     console.log(topicTag);
-    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : topicTag;
+    const tag = !this.isTopicPage ? this.currentRouteParams?.tag_name : topicTag;
 
     if (tag === null) {
       // eslint-disable-next-line no-console
@@ -107,7 +107,7 @@ export default class DiscourseTagBanners extends Component {
       console.log(this.args.model.tags[0].name);
       console.log(tag);
       console.log(this.args.model.tags[0]);
-      console.log(this.isTopic ? this.args.model.tags[0].name : this.currentRouteParams?.tag_name);
+      console.log(this.isTopicPage ? this.args.model.tags[0].name : this.currentRouteParams?.tag_name);
     }
 
     if (tag) {
