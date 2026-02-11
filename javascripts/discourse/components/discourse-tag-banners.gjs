@@ -85,25 +85,12 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
-    /* eslint-disable */
-    console.log(this.isTopicPage);
-    console.log(this.args.model.tags[0]);
-    console.log(this.args.model.tags[0] ? this.args.model.tags[0].name : null);
-    /* eslint-enable */
     const topicTag = this.args.model.tags[0] ? this.args.model.tags[0].name : null;
-    console.log(topicTag);
     const tag = !this.isTopicPage ? this.currentRouteParams?.tag_name : topicTag;
 
     if (tag === null) {
-      // eslint-disable-next-line no-console
-      console.log("Hiding");
       this.showBanner = false;
       return;
-    } else {
-      console.log(this.args.model.tags[0].name);
-      console.log(tag);
-      console.log(this.args.model.tags[0]);
-      console.log(this.isTopicPage ? this.args.model.tags[0].name : this.currentRouteParams?.tag_name);
     }
 
     if (tag) {
