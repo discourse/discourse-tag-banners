@@ -94,7 +94,8 @@ export default class DiscourseTagBanners extends Component {
     console.log(this.args.model.tags[0]);
     console.log(this.args.model.tags[0] ? this.args.model.tags[0].name : null);
     /* eslint-enable */
-    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : (this.args.model.tags[0] ? this.args.model.tags[0].name : null);
+    const topicTag = this.args.model.tags[0] ? this.args.model.tags[0].name : null;
+    const tag = !this.isTopic ? this.currentRouteParams?.tag_name : topicTag;
 
     if (tag === null) {
       // eslint-disable-next-line no-console
@@ -105,7 +106,7 @@ export default class DiscourseTagBanners extends Component {
       // eslint-disable-next-line no-console
       console.log(tag);
       // eslint-disable-next-line no-console
-      console.log(this.args.model.tags[0] ? true : false);
+      console.log(this.args.model.tags[0]);
       // eslint-disable-next-line no-console
       console.log(this.isTopic ? this.args.model.tags[0].name : this.currentRouteParams?.tag_name);
     }
