@@ -8,17 +8,20 @@ acceptance("Tag Banners | tag route", function (needs) {
   needs.settings({ tagging_enabled: true });
 
   needs.pretender((server, helper) => {
-    server.get("/tag/important/l/latest.json", () => {
+    const discoveryResponse = () => {
       return helper.response(
         cloneJSON(discoveryFixture["/tag/important/l/latest.json"])
       );
-    });
+    };
 
-    server.get("/tag/:tag_name/info", () => {
+    server.get("/tag/:tag_identifier/l/latest.json", discoveryResponse);
+
+    const tagInfoResponse = () => {
       return helper.response({
         tag_info: {
           id: 1,
           name: "important",
+          slug: "important",
           description: "Important topics",
           topic_count: 5,
           pm_only: false,
@@ -26,7 +29,9 @@ acceptance("Tag Banners | tag route", function (needs) {
         categories: [],
         tag_group_names: [],
       });
-    });
+    };
+
+    server.get("/tag/:tag_id/info.json", tagInfoResponse);
   });
 
   test("displays banner when visiting a tag route", async function (assert) {
