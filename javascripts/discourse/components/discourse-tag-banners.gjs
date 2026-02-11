@@ -103,7 +103,9 @@ export default class DiscourseTagBanners extends Component {
       return;
     } else {
       // eslint-disable-next-line no-console
-      console.log("Tag: '" + tag + "'");
+      console.log(tag);
+      // eslint-disable-next-line no-console
+      console.log(!this.isTopic ? this.currentRouteParams?.tag_name : (this.args.model.tags[0] ? this.args.model.tags[0].name : null));
     }
 
     if (tag) {
