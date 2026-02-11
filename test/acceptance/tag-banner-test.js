@@ -31,8 +31,6 @@ acceptance("Tag Banners | tag route", function (needs) {
       });
     };
 
-    server.get("/tag/:tag_name/info", tagInfoResponse);
-    server.get("/tag/:tag_name/info.json", tagInfoResponse);
     server.get("/tag/:tag_id/info.json", tagInfoResponse);
   });
 
