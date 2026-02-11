@@ -85,10 +85,6 @@ export default class DiscourseTagBanners extends Component {
 
   @action
   async getTagInfo() {
-    if (this.args.model) {
-      // eslint-disable-next-line no-console
-      console.log(this.args.model.tags[0].name);
-    }
     /* eslint-disable */
     console.log(this.isTopicPage);
     console.log(this.args.model.tags[0]);
