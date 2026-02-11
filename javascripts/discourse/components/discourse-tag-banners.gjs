@@ -95,6 +95,7 @@ export default class DiscourseTagBanners extends Component {
     console.log(this.args.model.tags[0] ? this.args.model.tags[0].name : null);
     /* eslint-enable */
     const topicTag = this.args.model.tags[0] ? this.args.model.tags[0].name : null;
+    console.log(topicTag);
     const tag = !this.isTopic ? this.currentRouteParams?.tag_name : topicTag;
 
     if (tag === null) {
