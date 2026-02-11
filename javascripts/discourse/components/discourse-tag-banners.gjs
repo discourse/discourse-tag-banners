@@ -90,7 +90,7 @@ export default class DiscourseTagBanners extends Component {
       console.log(this.args.model.tags[0].name);
     }
     /* eslint-disable */
-    console.log(!this.isTopic);
+    console.log(this.isTopic);
     console.log(this.args.model.tags[0]);
     console.log(this.args.model.tags[0] ? this.args.model.tags[0].name : null);
     /* eslint-enable */
