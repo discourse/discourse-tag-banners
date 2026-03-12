@@ -1,7 +1,8 @@
+/* eslint-disable ember/no-classic-components, ember/require-tagless-components */
 import { tracked } from "@glimmer/tracking";
 import Component from "@ember/component";
 import { getOwner } from "@ember/owner";
-import { not, or } from "truth-helpers";
+import { not, or } from "discourse/truth-helpers";
 import DiscourseTagBanners from "../../components/discourse-tag-banners";
 
 export default class extends Component {

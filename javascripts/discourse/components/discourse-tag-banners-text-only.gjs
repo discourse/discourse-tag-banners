@@ -1,7 +1,8 @@
+/* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
-import { eq } from "truth-helpers";
 import icon from "discourse/helpers/d-icon";
 import discourseTag from "discourse/helpers/discourse-tag";
+import { eq } from "discourse/truth-helpers";
 
 export default class DiscourseTagBannersTextOnly extends Component {
   tagName = ""; // removing an extra tag that is added by default

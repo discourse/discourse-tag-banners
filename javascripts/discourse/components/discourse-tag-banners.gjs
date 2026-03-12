@@ -6,7 +6,7 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 import { service } from "@ember/service";
-import { not, or } from "truth-helpers";
+import { not, or } from "discourse/truth-helpers";
 import DiscourseTagBannersPresentation from "./discourse-tag-banners-presentation";
 import DiscourseTagBannersTextOnly from "./discourse-tag-banners-text-only";
 
