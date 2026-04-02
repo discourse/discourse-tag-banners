@@ -114,25 +114,27 @@ export default class DiscourseTagBanners extends Component {
           {{didUpdate this.getTagInfo this.shouldRender}}
           {{willDestroy this.resetTag}}
         >
-          {{#if
-            (or
-              (not this.categoryBannerPresence.isPresent)
-              settings.show_with_category_banners
-            )
-          }}
-            <DiscourseTagBannersPresentation
-              @formattedTagName={{this.formattedTagName}}
-              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
-              @isIntersection={{this.isIntersection}}
-              @tag={{this.tag}}
-              @additionalClass={{this.additionalClass}}
-            />
-          {{else}}
-            <DiscourseTagBannersTextOnly
-              @formattedTagName={{this.formattedTagName}}
-              @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
-              @tag={{this.tag}}
-            />
+          {{#if this.tag}}
+            {{#if
+              (or
+                (not this.categoryBannerPresence.isPresent)
+                settings.show_with_category_banners
+              )
+            }}
+              <DiscourseTagBannersPresentation
+                @formattedTagName={{this.formattedTagName}}
+                @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+                @isIntersection={{this.isIntersection}}
+                @tag={{this.tag}}
+                @additionalClass={{this.additionalClass}}
+              />
+            {{else}}
+              <DiscourseTagBannersTextOnly
+                @formattedTagName={{this.formattedTagName}}
+                @formattedAdditionalTagNames={{this.formattedAdditionalTagNames}}
+                @tag={{this.tag}}
+              />
+            {{/if}}
           {{/if}}
         </div>
       {{/if}}
