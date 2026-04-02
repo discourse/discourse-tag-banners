@@ -6,12 +6,12 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 import { service } from "@ember/service";
+import { ajax } from "discourse/lib/ajax";
 import { not, or } from "discourse/truth-helpers";
 import DiscourseTagBannersPresentation from "./discourse-tag-banners-presentation";
 import DiscourseTagBannersTextOnly from "./discourse-tag-banners-text-only";
 
 export default class DiscourseTagBanners extends Component {
-  @service store;
   @service router;
   @service site;
 
@@ -88,8 +88,8 @@ export default class DiscourseTagBanners extends Component {
   async getTagInfo() {
     const tagIdentifier = this.#tagIdentifier;
     if (tagIdentifier) {
-      const result = await this.store.find("tag-info", tagIdentifier);
-      this.tag = result;
+      const result = await ajax(`/tag/${tagIdentifier}/info.json`);
+      this.tag = result.tag_info;
       this.isIntersection = this.currentRouteParams.additional_tags;
       this.keepDuringLoadingRoute = true;
     } else {
