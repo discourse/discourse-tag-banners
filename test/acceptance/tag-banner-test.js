@@ -50,3 +50,50 @@ acceptance("Tag Banners | tag route", function (needs) {
       .includesText("important", "tag name is displayed in the banner");
   });
 });
+
+acceptance("Tag Banners | uses route model tag data", function (needs) {
+  needs.settings({
+    tagging_enabled: true,
+    show_tag_description: true,
+  });
+
+  needs.pretender((server, helper) => {
+    server.get("/tag/1/notifications.json", () =>
+      helper.response({
+        tag_notification: {
+          id: 1,
+          name: "important",
+          notification_level: 1,
+        },
+      })
+    );
+
+    server.get("/tag/1/l/latest.json", () => {
+      const fixture = cloneJSON(
+        discoveryFixture["/tag/important/l/latest.json"]
+      );
+      fixture.topic_list.tags = [
+        {
+          id: 1,
+          name: "important",
+          slug: "important",
+          topic_count: 2,
+          staff: false,
+          description: "Important topics from route model",
+        },
+      ];
+      return helper.response(fixture);
+    });
+  });
+
+  test("renders description from route model without info.json request", async function (assert) {
+    await visit("/tag/important/1");
+
+    assert
+      .dom(".tag-banner-container .tag-title-contents p")
+      .hasText(
+        "Important topics from route model",
+        "description comes from the route model tag data"
+      );
+  });
+});
